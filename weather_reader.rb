@@ -11,12 +11,17 @@ class WeatherReader
     p output
   end
 
-  def sort_by_spread
-    days.sort { |a,b| a[3] <=> b[3] }
-  end
-
   def smallest_spread_day
     sort_by_spread.last[0].to_i
+  end
+
+  def bigest_spread_day
+    sort_by_spread.first[0].to_i
+  end
+
+  def order_by(value)
+
+    days.sort { |a,b| a[val] <=> b[val] }
   end
 
   def output
@@ -32,6 +37,10 @@ class WeatherReader
     end
   end
 
+  def sort_by_spread
+    days.sort { |a,b| a[3] <=> b[3] }
+  end
+
   def spread(day)
     max_temperature(day) - min_temperature(day)
   end
@@ -41,11 +50,25 @@ class WeatherReader
   end
 
   def min_temperature(day)
-    day[1].to_f
+    day[2].to_f
   end
 
   def max_temperature(day)
-    day[2].to_f
+    day[1].to_f
+  end
+
+  def get_id_from_name(name)
+    id = case name
+      when 'day' then 0
+      when 'MxT' then 1
+      when 'MnT' then 2
+      when 'Avt' then 3
+      when 'HDDay' then 4
+      when 'AvDP' then 5
+      when '1HrP' then 6
+      when 'TPcpn' then 7
+      else 0
+    end
   end
 
 end

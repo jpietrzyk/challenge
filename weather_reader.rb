@@ -12,7 +12,7 @@ class WeatherReader
   end
 
   def sort_by_spread
-    sorted = days.sort { |a,b| a[3] <=> b[3] }
+    days.sort { |a,b| a[3] <=> b[3] }
   end
 
   def smallest_spread_day

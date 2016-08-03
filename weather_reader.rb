@@ -20,7 +20,7 @@ class WeatherReader
   end
 
   def order_by(value)
-
+    vql = get_id_by_name
     days.sort { |a,b| a[val] <=> b[val] }
   end
 
@@ -33,7 +33,12 @@ class WeatherReader
   def read_data
     File.readlines(weather_data)[2..-1].each do |line|
       day = line.split(' ')
-      days << [day(day), min_temperature(day), max_temperature(day), spread(day)]
+      days << [
+        day(day), 
+        min_temperature(day), 
+        max_temperature(day), 
+        spread(day)
+      ]
     end
   end
 
@@ -46,18 +51,18 @@ class WeatherReader
   end
 
   def day(day)
-    day[0]
+    day[get_id_by_name('day')]
   end
 
   def min_temperature(day)
-    day[2].to_f
+    day[get_id_by_name('MnT')].to_f
   end
 
   def max_temperature(day)
-    day[1].to_f
+    day[get_id_by_name('MxT')].to_f
   end
 
-  def get_id_from_name(name)
+  def get_id_by_name(name)
     id = case name
       when 'day' then 0
       when 'MxT' then 1
@@ -67,6 +72,14 @@ class WeatherReader
       when 'AvDP' then 5
       when '1HrP' then 6
       when 'TPcpn' then 7
+      when 'PDir' then 9
+      when 'AvSp' then 10
+      when 'Dir' then 11
+      when 'MxS' then 12
+      when 'SkyC' then 13
+      when 'Mxr' then 14
+      when 'MnR' then 15
+      when 'AvSLP' then 16
       else 0
     end
   end

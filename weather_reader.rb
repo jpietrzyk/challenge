@@ -32,7 +32,6 @@ class WeatherReader
     end
   end
 
-
   def spread(day)
     max_temperature(day) - min_temperature(day)
   end

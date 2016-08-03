@@ -8,10 +8,12 @@ class WeatherReader
     @days = []
     @weather_data = weather_data
     read_data
+    p smallest_spread[0].to_i
   end
 
   def smallest_spread
-    
+    sorted = days.sort { |a,b| a[3] <=> b[3] }
+    sorted.last
   end
 
   private
